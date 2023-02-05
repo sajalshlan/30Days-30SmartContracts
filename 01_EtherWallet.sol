@@ -31,4 +31,12 @@ contract EtherWallet{
         require(msg.sender == i_owner, "NOt owner");
         _;
     }
+    
+    receive() external payable{
+        fund();
+    }
+
+     fallback() external payable{
+        fund();
+    }
 }
