@@ -7,18 +7,13 @@ pragma solidity ^0.8.17;
 //  contract should be destroyed after withdrawal - self destroy function just after clickin on withdraw
 
 contract PiggyBank{
-    address payable immutable i_owner;
+    address payable public immutable i_owner;
 
     //event
     event Deposit(uint amount);
 
     constructor() {
         i_owner = payable(msg.sender);
-    }
-
-    //function fund
-    function fund() payable public {
-        emit Deposit(msg.value);
     }
 
     //function withdraw and self-destroy
@@ -30,6 +25,7 @@ contract PiggyBank{
         selfdestruct(i_owner);
         }
 
+    //receive when msg.data is empty
         receive() external payable{
             emit Deposit(msg.value);
         }
